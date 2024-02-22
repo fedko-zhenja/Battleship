@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "Template for the WebSocket remote control task",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "start": "node ./index.js",
         "start:dev": "nodemon",
@@ -16,6 +15,7 @@
         "@tsconfig/node-lts": "^20.1.1",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.11.17",
+        "@types/ws": "^8.5.10",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "eslint": "^8.56.0",
         "eslint-config-prettier": "^9.1.0",
