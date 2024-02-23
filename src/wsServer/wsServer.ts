@@ -1,4 +1,6 @@
 import WebSocket from 'ws';
+import { getEventHandler } from './getEventHandler';
+import { type ReqResTemplate } from './types';
 
 export function wsServer(httpPort: number): void {
     const portNumber = 3000;
@@ -9,8 +11,21 @@ export function wsServer(httpPort: number): void {
     });
 
     ws.on('connection', (wsConnection) => {
-        wsConnection.on('message', (message: string) => {
-            console.log(`server received: ${message}`);
+        wsConnection.on('message', (event: string) => {
+            const data: ReqResTemplate = JSON.parse(event);
+            const handler = getEventHandler(data.type);
+
+            if (handler) {
+                const resalt = handler(data);
+                // console.log(handler, resalt);
+                wsConnection.send(JSON.stringify(resalt));
+            }
+        });
+
+        wsConnection.on('error', console.error);
+
+        wsConnection.on('close', () => {
+            console.log('disconnected');
         });
     });
 }
