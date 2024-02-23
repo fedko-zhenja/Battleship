@@ -1,5 +1,5 @@
 import { type ReqResTemplate } from '../types.ts';
-import { database } from '../database/database.ts';
+import { usersDatabase } from '../database/database.ts';
 
 export function registration(data: ReqResTemplate): ReqResTemplate {
     const regData = JSON.parse(data.data);
@@ -7,8 +7,10 @@ export function registration(data: ReqResTemplate): ReqResTemplate {
     const newUser = {
         name: regData.name,
         password: regData.password,
-        index: database.length + 1,
+        index: usersDatabase.length + 1,
     };
+
+    usersDatabase.push(newUser);
 
     const resData = {
         name: newUser.name,

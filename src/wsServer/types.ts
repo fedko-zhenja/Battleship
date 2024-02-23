@@ -19,4 +19,16 @@ export interface ReqResTemplate {
     id: number;
 }
 
-export type Handler = (data: ReqResTemplate) => ReqResTemplate;
+export type Handler = (data: ReqResTemplate) => ReqResTemplate | undefined;
+
+export interface User {
+    name: string;
+    password: string;
+    index: number;
+}
+
+export interface Room {
+    id: number;
+    user1?: { name: string; index: string };
+    user2?: { name: string; index: string };
+}
