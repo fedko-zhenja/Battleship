@@ -1,3 +1,5 @@
+import type WebSocket from 'ws';
+
 export enum eventType {
     registration = 'reg',
     updateWinners = 'update_winners',
@@ -19,16 +21,23 @@ export interface ReqResTemplate {
     id: number;
 }
 
-export type Handler = (data: ReqResTemplate) => ReqResTemplate | undefined;
+export interface WS extends WebSocket {
+    name: string;
+    index: number;
+    _socket?: { _server: { _connections: number } };
+}
+
+export type Handler = (data: ReqResTemplate, ws: WS) => void;
 
 export interface User {
     name: string;
     password: string;
     index: number;
+    ws?: WebSocket;
 }
 
 export interface Room {
     id: number;
-    user1?: { name: string; index: string };
-    user2?: { name: string; index: string };
+    user1?: { name: string; index: number };
+    user2?: { name: string; index: number };
 }
