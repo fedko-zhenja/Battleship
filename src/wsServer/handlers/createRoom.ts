@@ -46,7 +46,7 @@ export function createRoom(data: ReqResTemplate, wsConnection: WS): void {
         } else {
             const resData = [
                 {
-                    roomId: rooms[0].id,
+                    roomId: rooms[rooms.length - 1].id,
                     roomUsers: [
                         {
                             name: rooms[0].user1?.name,

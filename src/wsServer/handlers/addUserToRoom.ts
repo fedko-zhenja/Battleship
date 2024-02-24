@@ -15,6 +15,9 @@ export function addUserToRoom(data: ReqResTemplate, wsConnection: WS): void {
     const { indexRoom } = JSON.parse(data.data);
     const room = rooms.find((r: Room) => r.id === indexRoom);
 
+    console.log('indexRoom', indexRoom);
+    console.log('room', room);
+
     if (room) {
         room.user2 = {
             name: players[1].name,
