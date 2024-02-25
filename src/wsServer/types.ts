@@ -36,8 +36,24 @@ export interface User {
     ws?: WebSocket;
 }
 
+export interface ShipsData {
+    gameId: number;
+    ships: [
+        {
+            position: {
+                x: number;
+                y: number;
+            };
+            direction: boolean;
+            length: number;
+            type: 'small' | 'medium' | 'large' | 'huge';
+        },
+    ];
+    indexPlayer: number;
+}
+
 export interface Room {
     id: number;
-    user1?: { name: string; index: number };
-    user2?: { name: string; index: number };
+    user1?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData };
+    user2?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData };
 }

@@ -18,6 +18,7 @@ export function addUserToRoom(data: ReqResTemplate, wsConnection: WS): void {
         room.user2 = {
             name: players[1].name,
             index: players[1].index,
+            ws: players[1].ws,
         };
 
         if (players.length === 2) {

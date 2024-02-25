@@ -14,6 +14,7 @@ export function createRoom(data: ReqResTemplate, wsConnection: WS): void {
                 user1: {
                     name: user.name,
                     index: user.index,
+                    ws: user.ws,
                 },
             };
 
@@ -68,6 +69,7 @@ export function createRoom(data: ReqResTemplate, wsConnection: WS): void {
                     user1: {
                         name: user.name,
                         index: user.index,
+                        ws: user.ws,
                     },
                 };
 
