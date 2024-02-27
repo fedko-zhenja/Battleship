@@ -1,26 +1,17 @@
-import { type ReqResTemplate, type WS, eventType } from '../types.ts';
+import { type ReqResTemplate, type WS, eventType, type ShipsData } from '../types.ts';
 import { rooms } from '../database/database.ts';
+import { generateShipState } from './generateShipState.js';
+
 
 // let callNum = 0;
 
 export function addShips(data: ReqResTemplate, wsConnection: WS): void {
     const shipsData = JSON.parse(data.data);
-    // console.log('addShips data', data);
-    // console.log(rooms, 'rooms');
-    // callNum++;
-
-    // if (callNum === 2) {
-    //     console.log(callNum, 'callNun');
-    //     callNum = 0;
-    // }
-
     const gameId = shipsData.gameId;
     const indexPlayer = shipsData.indexPlayer;
-    const shipsForUser = shipsData.ships;
+    const shipsForUser: ShipsData = shipsData.ships;
 
     const room = rooms[gameId - 1];
-
-    // console.log(room, gameId);
 
     if (room.user1) {
         if (room.user1.index === indexPlayer) {
@@ -33,8 +24,6 @@ export function addShips(data: ReqResTemplate, wsConnection: WS): void {
             room.user2.ships = shipsForUser;
         }
     }
-
-    // console.log(rooms, 'rooms');
 
     for (let i = 0; i < rooms.length; i++) {
         if (rooms[i].user1?.ships && rooms[i].user2?.ships) {
@@ -52,9 +41,8 @@ export function addShips(data: ReqResTemplate, wsConnection: WS): void {
                 id: 0,
             };
 
-            console.log('resalt1', resalt);
-
             rooms[i].user1?.ws?.send(JSON.stringify(resalt));
+            generateShipState(resDataCurPlayerInd, resDataShips);
 
             const resDataShips2 = rooms[i].user2?.ships;
             const resDataCurPlayerInd2 = rooms[i].user2?.index;
@@ -70,9 +58,23 @@ export function addShips(data: ReqResTemplate, wsConnection: WS): void {
                 id: 0,
             };
 
-            // console.log('resDataShips2', rooms[i].user2);
-            console.log('resalt2', resalt2);
             rooms[i].user2?.ws?.send(JSON.stringify(resalt2));
+            generateShipState(resDataCurPlayerInd2, resDataShips2);
+
+            // turn
+
+            rooms[i].idCurrentPlayer = rooms[i].user1?.index;
+
+            const resDataTurn = { currentPlayer: rooms[i].idCurrentPlayer };
+
+            const resaltTurn = {
+                type: eventType.turn,
+                data: JSON.stringify(resDataTurn),
+                id: 0,
+            };
+
+            rooms[i].user1?.ws?.send(JSON.stringify(resaltTurn));
+            rooms[i].user2?.ws?.send(JSON.stringify(resaltTurn));
         }
     }
 }

@@ -52,8 +52,34 @@ export interface ShipsData {
     indexPlayer: number;
 }
 
+export interface Coordinates {
+    x: number;
+    y: number;
+}
+
 export interface Room {
     id: number;
-    user1?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData };
-    user2?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData };
+    user1?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData; };
+    user2?: { name: string; index: number; ws?: WebSocket; ships?: ShipsData; };
+    idCurrentPlayer?: number;
 }
+
+export interface ShipCoordinates {
+    x: number;
+    y: number;
+    isShooted: boolean;
+}
+
+export enum ShipStatus {
+    alive = 'alive',
+    damaged = 'damaged',
+    killed = 'killed'
+}
+
+export interface ShipState {
+    userId?: number;
+    shipStatus: ShipStatus
+    shipCoordinates: ShipCoordinates[];
+}
+
+export type ShipsStateDB = ShipState[]
