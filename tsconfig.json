@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "rootDir": "./src",
+        "allowJs": true,
+        "outDir": "dist",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "baseUrl": "./",
+        "paths": {
+            "*": [
+                "src/*"
+            ]
+        },
+    },
+    "include": [
+        "src/**/*",
+        "tests",
+        "./.eslintrc.json",
+        // "../index.js"
+    ],
+    "exclude": [
+        "node_modules",
+        // "../index.js"
+    ]
+}
