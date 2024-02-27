@@ -27,7 +27,9 @@ export function attack(data: ReqResTemplate, wsConnection: WS): void {
 
             if (isShipKilled) {
                 shipState.shipStatus = ShipStatus.killed
-                shotStatus = 'killed' // TODO: enum
+                shotStatus = 'killed' // TODO: 
+                
+                // TODO: check miss cell and send miss sell
             } else {
                 shipState.shipStatus =ShipStatus.damaged
                 shotStatus = 'shot' // TODO: enum
@@ -55,8 +57,6 @@ export function attack(data: ReqResTemplate, wsConnection: WS): void {
 
 
 // TODO: send turn!!!!
-
-    // console.log('attack', attackData);
 }
 
 

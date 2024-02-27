@@ -2,17 +2,8 @@ import { type ReqResTemplate, type WS, type Room, eventType } from '../types.ts'
 import { rooms, players } from '../database/database.ts';
 
 export function addUserToRoom(data: ReqResTemplate, wsConnection: WS): void {
-    // console.log('addUserToRoom!!!!!!!!!!!');
-    // console.log('rooms', rooms);
-    // console.log('usersDatabase', usersDatabase);
-    // console.log('players', players);
-    // console.log('numberGames', numberGames);
-
     const { indexRoom } = JSON.parse(data.data);
     const room = rooms.find((r: Room) => r.id === indexRoom);
-
-    // console.log('indexRoom', indexRoom);
-    // console.log('room', room);
 
     if (room) {
         room.user2 = {
@@ -38,8 +29,6 @@ export function addUserToRoom(data: ReqResTemplate, wsConnection: WS): void {
             }
 
             players.splice(0, players.length);
-
-            // console.log('rooms', rooms);
         }
     } else {
         const resData = {

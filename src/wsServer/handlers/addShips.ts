@@ -3,8 +3,6 @@ import { rooms } from '../database/database.ts';
 import { generateShipState } from './generateShipState.js';
 
 
-// let callNum = 0;
-
 export function addShips(data: ReqResTemplate, wsConnection: WS): void {
     const shipsData = JSON.parse(data.data);
     const gameId = shipsData.gameId;

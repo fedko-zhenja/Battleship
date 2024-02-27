@@ -14,12 +14,9 @@ export function wsServer(httpPort: number): void {
         wsConnection.on('message', (event: string) => {
             const data: ReqResTemplate = JSON.parse(event);
             const handler = getEventHandler(data.type);
-            // getEventHandler(data.type);
 
             if (handler) {
                 handler(data, wsConnection);
-                // console.log('create');
-                // wsConnection.send(JSON.stringify(resalt));
             }
         });
 

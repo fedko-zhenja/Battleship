@@ -28,6 +28,4 @@ export function registration(data: ReqResTemplate, wsConnection: WS): void {
     };
 
     wsConnection.send(JSON.stringify(resalt));
-    // console.log(usersDatabase);
-    // return resalt;
 }
